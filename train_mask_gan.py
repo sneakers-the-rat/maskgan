@@ -44,6 +44,7 @@ import collections
 from functools import partial
 import os
 import time
+import json
 # Dependency imports
 
 import numpy as np
@@ -1102,7 +1103,12 @@ def main(_):
   elif FLAGS.data_set == 'imdb':
     word_to_id = imdb_loader.build_vocab(
         os.path.join(FLAGS.data_dir, 'vocab.txt'))
+
   id_to_word = {v: k for k, v in word_to_id.iteritems()}
+
+  # save maps
+  with open(os.path.join(FLAGS.base_directory, 'wordmap.json'), 'w') as id_f:
+      json.dump(word_to_id, id_f)
 
   # Dictionary of Training Set n-gram counts.
   bigram_tuples = n_gram.find_all_ngrams(valid_data_flat, n=2)
