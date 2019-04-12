@@ -36,7 +36,6 @@ def _read_words(filename):
 
 def build_vocab(filename):
   data = _read_words(filename)
-  print(data[0:1000])
 
   counter = collections.Counter(data)
   count_pairs = sorted(counter.items(), key=lambda x: (-x[1], x[0]))
@@ -55,7 +54,7 @@ def _file_to_word_ids(filename, word_to_id):
   return [word_to_id[word] for word in data if word in word_to_id]
 
 
-def ptb_raw_data(data_path=None):
+def ptb_raw_data(data_path=None, only_schill=False):
   """Load PTB raw data from data directory "data_path".
   Reads PTB text files, converts strings to integer ids,
   and performs mini-batching of the inputs.
@@ -73,8 +72,14 @@ def ptb_raw_data(data_path=None):
   valid_path = os.path.join(data_path, "ptb.valid.txt")
   test_path = os.path.join(data_path, "ptb.test.txt")
 
+  if only_schill:
+    schill_path = os.path.join(data_path, 'schill.txt')
+
   word_to_id = build_vocab(train_path)
-  train_data = _file_to_word_ids(train_path, word_to_id)
+  if only_schill:
+      train_data = _file_to_word_ids(schill_path, word_to_id)
+  else:
+      train_data = _file_to_word_ids(train_path, word_to_id)
   valid_data = _file_to_word_ids(valid_path, word_to_id)
   test_data = _file_to_word_ids(test_path, word_to_id)
   vocabulary = len(word_to_id)

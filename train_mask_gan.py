@@ -88,6 +88,9 @@ tf.app.flags.DEFINE_integer('task', 0,
 tf.app.flags.DEFINE_integer('ps_tasks', 0, """Number of tasks in the ps job.
                             If 0 no ps job is used.""")
 
+tf.app.flags.DEFINE_boolean('only_schill', False,
+                            "whether to only use schill's words")
+
 ## General FLAGS.
 tf.app.flags.DEFINE_string(
     'hparams', '', 'Comma separated list of name=value hyperparameter pairs.')
@@ -1076,7 +1079,10 @@ def main(_):
 
   # Load data set.
   if FLAGS.data_set == 'ptb':
-    raw_data = ptb_loader.ptb_raw_data(FLAGS.data_dir)
+    if FLAGS.only_schill:
+      raw_data = ptb_loader.ptb_raw_data(FLAGS.data_dir, only_schill=True)
+    else:
+      raw_data = ptb_loader.ptb_raw_data(FLAGS.data_dir)
     train_data, valid_data, test_data, _ = raw_data
     valid_data_flat = valid_data
   elif FLAGS.data_set == 'imdb':
