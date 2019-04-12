@@ -1107,7 +1107,7 @@ def main(_):
   id_to_word = {v: k for k, v in word_to_id.iteritems()}
 
   # save maps
-  with open(os.path.join(FLAGS.base_directory, 'wordmap.json'), 'w') as id_f:
+  with open('.wordmap.json', 'w') as id_f:
       json.dump(word_to_id, id_f)
 
   # Dictionary of Training Set n-gram counts.
