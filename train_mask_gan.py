@@ -548,7 +548,7 @@ def train_model(hparams, data, log_dir, log, id_to_word, data_ngram_counts):
             is_chief=is_chief,
             saver=model.saver,
             global_step=model.global_step,
-            save_model_secs=60,
+            save_model_secs=600,
             recovery_wait_secs=30,
             summary_op=None,
             init_fn=init_fn)
