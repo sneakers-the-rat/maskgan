@@ -31,17 +31,19 @@ EOS_INDEX = 0
 
 def _read_words(filename):
   with tf.gfile.GFile(filename, "r") as f:
-    return f.read().decode("utf-8").replace("\n", " <eos> ").encode('ascii', errors='ignore').split()
+    return f.read().replace("\n", " <eos> ").encode('ascii', errors='ignore').decode('utf-8').split()
 
 
 def build_vocab(filename):
   data = _read_words(filename)
+  print(data[0:100])
 
   counter = collections.Counter(data)
   count_pairs = sorted(counter.items(), key=lambda x: (-x[1], x[0]))
 
   words, _ = list(zip(*count_pairs))
   word_to_id = dict(zip(words, range(len(words))))
+  #print(word_to_id)
   print("<eos>:", word_to_id["<eos>"])
   global EOS_INDEX
   EOS_INDEX = word_to_id["<eos>"]
