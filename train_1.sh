@@ -10,7 +10,7 @@ python3 train_mask_gan.py \
  --generator_model='seq2seq_vd' \
  --discriminator_model='rnn_zaremba' \
  --is_present_rate=0.5 \
- --summaries_every=100 \
+ --summaries_every=1000 \
  --print_every=250 \
  --max_num_to_print=3 \
  --gen_training_strategy=cross_entropy \
