@@ -11,7 +11,7 @@ python3 train_mask_gan.py \
  --discriminator_model='rnn_zaremba' \
  --is_present_rate=0.5 \
  --summaries_every=1000 \
- --print_every=250 \
+ --print_every=2500 \
  --max_num_to_print=3 \
  --gen_training_strategy=cross_entropy \
  --seq2seq_share_embedding
