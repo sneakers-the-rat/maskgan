@@ -1110,7 +1110,7 @@ def main(_):
     word_to_id = imdb_loader.build_vocab(
         os.path.join(FLAGS.data_dir, 'vocab.txt'))
 
-  id_to_word = {v: k for k, v in word_to_id.iteritems()}
+  id_to_word = {v: k for k, v in word_to_id.items()}
 
   # save maps
   with open('.wordmap.json', 'w') as id_f:
