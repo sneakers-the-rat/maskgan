@@ -757,7 +757,7 @@ def train_model(hparams, data, log_dir, log, id_to_word, data_ngram_counts):
 
                 # Summary:  n-gram
                 avg_percent_captured = {'2': 0., '3': 0., '4': 0.}
-                for n, data_ngram_count in data_ngram_counts.iteritems():
+                for n, data_ngram_count in data_ngram_counts.items():
                   batch_percent_captured = evaluation_utils.sequence_ngram_evaluation(
                       sess, model.fake_sequence, log, train_feed,
                       data_ngram_count, int(n))
